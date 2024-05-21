@@ -1,0 +1,79 @@
+{% extends "document_template.txt" %}
+
+
+{%block task%}
+You will be provided with an image of a Bill of Lading document. Your task is to extract the relevant information from the document and return it as structured data in JSON format with the following structure and keys in snake_case:
+
+{
+  "ship_from": {
+    "name": "The name of the company or entity shipping the goods",
+    "address": "The street address of the shipping location",
+    "city": "The city of the shipping location", 
+    "state": "The state of the shipping location",
+    "zip": "The zip or postal code of the shipping location"
+  },
+  "ship_to": {
+    "name": "The name of the company or entity receiving the goods",
+    "address": "The street address of the destination location",
+    "city": "The city of the destination location",
+    "state": "The state of the destination location", 
+    "zip": "The zip or postal code of the destination location"
+  },
+  "third_party_freight_charges_bill_to": {
+    "name": "The name of the third-party company or entity responsible for freight charges",
+    "address": "The street address of the third-party company",
+    "city": "The city of the third-party company",
+    "state": "The state of the third-party company",
+    "zip": "The zip or postal code of the third-party company"
+  },
+  "carrier": "The name of the carrier or transportation company",
+  "trailer_number": "The number of the trailer or container used for transportation", 
+  "seal_number": "The seal number used to secure the trailer or container",
+  "scac": "The Standard Carrier Alpha Code (SCAC) associated with the carrier",
+  "pro_number": "The Progressive Number (PRO number) associated with the shipment",
+  "customer_order_numbers": [
+    {
+      "order_number": "The customer's order number for this line item",
+      "packages": "The number of packages for this order",
+      "weight": "The total weight for this order",
+      "pallets_or_slips": [
+        {
+          "number": "The pallet or slip number",
+          "additional_shipper_info": "Any additional shipper information for this pallet/slip"
+        }
+      ]
+    }
+  ],
+  "package_count": "The total number of packages or pieces in the shipment",
+  "weight": "The total weight of the shipment",
+  "pallets_or_slips": [
+    {
+      "number": "The pallet or slip number",
+      "additional_shipper_info": "Any additional shipper information for this pallet/slip"
+    }
+  ],
+  "handling": {
+    "qty": "The quantity of items being handled",
+    "type": "The type of handling unit (e.g., PLT for pallet)", 
+    "package_qty": "The quantity of packages within the handling unit",
+    "package_type": "The type of package (e.g., CTN for carton)",
+    "weight": "The weight of the handling unit",
+    "commodity_description": "A description of the commodities or goods being shipped"
+  },
+  "cod_amount": "The Cash on Delivery (COD) amount, if applicable",
+  "fee_terms": "The terms for any additional fees or charges",
+  "signature_details": {
+    "trailers_loaded": "An indication of whether the trailers were loaded (e.g., 'X')",
+    "freight_counted": "An indication of whether the freight was counted (e.g., 'X')", 
+    "by_shipper": "An indication of whether the shipment was handled by the shipper (e.g., 'X')",
+    "by_driver": "An indication of whether the shipment was handled by the driver (e.g., 'X')",
+    "by_driver_bullets": "Any additional notes or details related to the driver's handling",
+    "by": "Any additional notes or details related to the handling of the shipment"
+  }
+}
+
+Please be as accurate as possible in extracting the information from the Bill of Lading document and populating the JSON schema accordingly. If a field is not present or cannot be accurately determined, you can leave it as null or an empty string/array as appropriate.
+
+
+{% endblock %}
+

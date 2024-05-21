@@ -1,0 +1,24 @@
+{% extends "document_template.txt" %}
+
+
+{%block task%}
+This document is a fund fact sheet. 
+Your task is to extract specific values from the document as JSON format. 
+You should extract these values with an <extracted_data> tag. 
+
+These are the following data points you should extact. 
+fund_name: The name of the fund
+cusip: A 5 digit identifier. There may be multiple
+share_class: the types of shares
+ticker: The 4 character symbol for the fund
+report_date: The date of the report
+financial_period: The period the report covers (something like 4Q or Q4 is common, indicating a financial quarter)
+document_identifier: This would denote this being a fund fact sheet
+management_discussion: A paragraph describing the fund performance
+performance: a table describing performance versus the benchmark. If there are time periods, break each time period out into separate sub-data points
+benchmark_funds: Other funds this fund's performance is compared to
+net_assets: The total $ amount of assets under management. Cite this in millions of dollars as a float value
+top_holdings: If this is present, it denotes the top holdings of the fund. List them with percentages if available
+
+
+{% endblock %}
